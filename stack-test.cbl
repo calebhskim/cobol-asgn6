@@ -21,8 +21,8 @@
        PROCEDURE DIVISION.
        DISPLAY WS-EXPR1.
        UNSTRING WS-EXPR1 DELIMITED BY ','
-           INTO WS-STR1, WS-STR2, WS-STR3.
-       END-NSTRING.
+           INTO WS-STR1, WS-STR2, WS-STR3
+       END-UNSTRING
        CALL "push" USING
        BY REFERENCE stack
        BY CONTENT WS-STR3
@@ -48,31 +48,201 @@
            BY REFERENCE node-info3
            END-CALL
        IF node-info = "+" THEN
-           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2).
-           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3).
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
            ADD NUM1 NUM2 to NUM3
-           DISPLAY NUM3.
+           DISPLAY NUM3
        ELSE
        IF node-info = "-" THEN
-           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2).
-           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3).
-           SUBTRACT NUM1 NUM2 to NUM3
-           DISPLAY NUM3.
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           SUBTRACT NUM2 from NUM1 giving NUM3
+           DISPLAY NUM3
        ELSE
        IF node-info = "*" THEN
-           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2).
-           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3).
-           MULTIPLY NUM1 NUM2 to NUM3
-           DISPLAY NUM3.
-        ELSE
-               IF node-info = "/" THEN
-           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2).
-           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3).
-           DIVIDE NUM1 NUM2 to NUM3
-           DISPLAY NUM3.
-           ELSE
-           DISPLAY "BAD BINOP".
-       END-IF.
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           MULTIPLY NUM1 by NUM2 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "/" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           DIVIDE NUM2 into NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+           DISPLAY "Error invalid binop."
+           END-IF.
+
+
+       DISPLAY WS-EXPR2.
+       UNSTRING WS-EXPR2 DELIMITED BY ','
+           INTO WS-STR1, WS-STR2, WS-STR3
+       END-UNSTRING
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR3
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR2 
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR1
+       END-CALL    
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info2
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info3
+           END-CALL
+
+
+       IF node-info = "+" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           ADD NUM1 NUM2 to NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "-" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           SUBTRACT NUM2 from NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "*" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           MULTIPLY NUM1 by NUM2
+           DISPLAY NUM2
+       ELSE
+       IF node-info = "/" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           DIVIDE NUM2 into NUM1
+           DISPLAY NUM1
+       ELSE
+           DISPLAY "Error invalid binop."
+           END-IF.
+
+           
+       DISPLAY WS-EXPR3.
+       UNSTRING WS-EXPR3 DELIMITED BY ','
+           INTO WS-STR1, WS-STR2, WS-STR3
+       END-UNSTRING
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR3
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR2 
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR1
+       END-CALL    
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info2
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info3
+           END-CALL
+       IF node-info = "+" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           ADD NUM1 NUM2 to NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "-" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           SUBTRACT NUM2 from NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "*" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           MULTIPLY NUM1 by NUM2 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "/" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           DIVIDE NUM2 into NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+           DISPLAY "Error invalid binop."
+           END-IF.
+
+
+       DISPLAY WS-EXPR4.
+       UNSTRING WS-EXPR4 DELIMITED BY ','
+           INTO WS-STR1, WS-STR2, WS-STR3
+       END-UNSTRING
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR3
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR2 
+       END-CALL
+       CALL "push" USING
+       BY REFERENCE stack
+       BY CONTENT WS-STR1
+       END-CALL    
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info2
+           END-CALL
+           CALL "pop" USING
+           BY REFERENCE stack
+           BY REFERENCE node-info3
+           END-CALL
+       IF node-info = "+" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           ADD NUM1 NUM2 to NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "-" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           SUBTRACT NUM2 from NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "*" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           MULTIPLY NUM1 by NUM2 giving NUM3
+           DISPLAY NUM3
+       ELSE
+       IF node-info = "/" THEN
+           COMPUTE NUM1 = FUNCTION NUMVAL (node-info2)
+           COMPUTE NUM2 = FUNCTION NUMVAL (node-info3)
+           DIVIDE NUM2 into NUM1 giving NUM3
+           DISPLAY NUM3
+       ELSE
+           DISPLAY "Error invalid binop."
+           END-IF.
        STOP RUN.
        END PROGRAM stack-test.
 
